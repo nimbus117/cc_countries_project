@@ -15,7 +15,7 @@ Countries.prototype.getData = function () {
 Countries.prototype.publishCountryNames = function (data) {
   this.data = data;
   const countryNames = data.map(country => country.name);
-  console.log(countryNames);
+  // console.log(countryNames);
   PubSub.publish('Countries:country-names', countryNames);
 }
 
