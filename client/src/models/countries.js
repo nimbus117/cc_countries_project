@@ -6,7 +6,7 @@ const Countries = function () {
 }
 
 Countries.prototype.bindEvents = function () {
-  PubSub.subscribe('SelectView:country-name', (event) => {
+  PubSub.subscribe('SelectView:country-index', (event) => {
     this.publishCountry(event.detail);
   });
 };
@@ -14,20 +14,25 @@ Countries.prototype.bindEvents = function () {
 Countries.prototype.getData = function () {
   new Request('https://restcountries.eu/rest/v2/all')
     .get()
-    .then(data => this.publishCountryNames(data))
+    .then(data => this.publishSelectDetails(data))
     .catch(console.error)
 }
 
-Countries.prototype.publishCountryNames = function (data) {
+Countries.prototype.publishSelectDetails = function (data) {
   this.data = data;
-  const countryNames = data.map(country => country.name);
+  const countryDetails = data.map((country, index) => {
+    return {
+      name: country.name,
+      value: index,
+      code: country.alpha2Code
+    }
+  });
   // console.log(countryNames);
-  PubSub.publish('Countries:country-names', countryNames);
+  PubSub.publish('Countries:country-names', countryDetails);
 }
 
-Countries.prototype.publishCountry = function (name) {
-  const country = this.data.find( (country) => country.name === name )
-  PubSub.publish('Countries:country-data', country);
+Countries.prototype.publishCountry = function (index) {
+  PubSub.publish('Countries:country-data', this.data[index]);
 };
 
 

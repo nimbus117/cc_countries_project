@@ -24,8 +24,9 @@ SelectView.prototype.bindEvents = function (pubChannel) {
 };
 
 SelectView.prototype.populate = function (names) {
-  names.forEach(name => {
-    createAppend('option', name, this.select);
+  names.forEach((name, index) => {
+    const option = createAppend('option', name, this.select);
+    option.value = index;
   });
 };
 
