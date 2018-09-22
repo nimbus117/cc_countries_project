@@ -17,8 +17,9 @@ CountryView.prototype.render = function (data) {
   let name= '';
   if (data.name === data.nativeName) {name = data.name}
   else {name = `${data.name} (${data.nativeName})`}
+  createAppend("h2", name, this.element);
+
   const list = createAppend('ul', '', this.element)
-  createAppend("li", name, list);
   createAppend("li", `Region: ${data.region}`, list);
   createAppend("li", `Capital City: ${data.capital}`, list);
   createAppend("li", `Population: ${data.population}`, list);
