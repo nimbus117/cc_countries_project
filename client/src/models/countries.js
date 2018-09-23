@@ -27,7 +27,6 @@ Countries.prototype.publishSelectDetails = function (data) {
       code: country.alpha3Code
     }
   });
-  // console.log(countryNames);
   PubSub.publish('Countries:country-names', countryDetails);
 }
 
