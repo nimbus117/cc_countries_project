@@ -24,7 +24,7 @@ Countries.prototype.publishSelectDetails = function (data) {
     return {
       name: country.name,
       value: index,
-      code: country.alpha2Code
+      code: country.alpha3Code
     }
   });
   // console.log(countryNames);

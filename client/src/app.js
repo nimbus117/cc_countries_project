@@ -3,8 +3,6 @@ const MapSelectView = require('./views/map_select_view.js');
 const CountryView = require('./views/country_view.js')
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('JavaScript Loaded');
-
   const selectElement = document.querySelector('#select');
   const mapSelectView = new MapSelectView(selectElement);
   mapSelectView.bindEvents();

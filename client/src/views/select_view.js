@@ -12,7 +12,7 @@ SelectView.prototype.create = function (selectId, selectText) {
   const select = createAppend('select', '', this.element)
   select.id = selectId;
   this.select = select;
-  const option = createAppend('option', name, select);
+  const option = createAppend('option', '', select);
   option.setAttribute('disabled', true);
   option.setAttribute('selected', true);
 };
