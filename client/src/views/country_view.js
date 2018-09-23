@@ -1,5 +1,7 @@
 const PubSub = require('../helpers/pub_sub.js');
 const createAppend = require('../helpers/create_append.js');
+const MapView = require('./map_view.js');
+
 
 const CountryView = function(element) {
   this.element = element;
@@ -41,6 +43,12 @@ CountryView.prototype.render = function (data) {
   const flag = createAppend("img", '', this.element);
   flag.src = data.flag;
   flag.alt = `The ${data.demonym} flag`;
+
+  const mapDiv = createAppend("div", '', this.element);
+  mapDiv.className = "mapid";
+  const mapElement = document.querySelector('#mapid');
+  const mapView = new MapView(mapElement);
+  mapView.bindEvents();
 };
 
 
