@@ -44,11 +44,9 @@ CountryView.prototype.render = function (data) {
   flag.src = data.flag;
   flag.alt = `The ${data.demonym} flag`;
 
-  const mapDiv = createAppend("div", '', this.element);
-  mapDiv.className = "mapid";
-  const mapElement = document.querySelector('#mapid');
-  const mapView = new MapView(mapElement);
-  mapView.bindEvents();
+  const mapDiv = createAppend("div", '', this.element)
+  mapDiv.id = "mapid";
+  const mapView = new MapView(mapDiv, data);
 };
 
 
