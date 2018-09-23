@@ -41,6 +41,8 @@ CountryView.prototype.render = function (data) {
   const flag = createAppend("img", '', this.element);
   flag.src = data.flag;
   flag.alt = `The ${data.demonym} flag`;
+
+  let mymap = L.map('mapid').setView([0, 0], 13);
 };
 
 
