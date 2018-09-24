@@ -4,7 +4,6 @@ const SelectView = require('./select_view.js');
 
 const NavView = function(element) {
   this.element = element;
-  // this.navdiv = navdiv;
 };
 
 NavView.prototype.bindEvents = function () {
