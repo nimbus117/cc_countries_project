@@ -8,15 +8,11 @@ const CountryChartView = function (element) {
 
 CountryChartView.prototype.render = function (data, title, seriesName) {
   const element = createAppend('div', '', this.element);
+  element.classList.add('country-chart')
   Highcharts.chart(element, {
     chart: {
       borderWidth: 1,
       // backgroundColor: '#ECC27C',
-      options3d: {
-        enabled: true,
-        alpha: 45,
-        beta: 0
-      }
     },
     title: {
       text: title

@@ -12,8 +12,9 @@ MapView.prototype.render = function (data) {
 
   const lat = data.latlng[0];
   const long = data.latlng[1];
+  const zoom = 3;
 
-  var map = L.map(this.element).setView([lat, long], 5);
+  var map = L.map(this.element).setView([lat, long], zoom);
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 20,
