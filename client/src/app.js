@@ -4,6 +4,7 @@ const CountryView = require('./views/country_view.js')
 const NavView = require('./views/nav_view.js');
 const GiniChartView = require('./views/gini_chart_view.js');
 
+
 document.addEventListener('DOMContentLoaded', () => {
   const selectElement = document.querySelector('#select');
   const mapSelectView = new MapSelectView(selectElement);
