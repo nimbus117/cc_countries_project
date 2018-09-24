@@ -1,7 +1,8 @@
 body {
-  background-color: #7FCAFF;
+  background-color: #FFDCBF;
+  padding: 15px;
 }
 
 #map-select {
-  margin-top: 10px;
+  box-shadow: 0 5px 8px rgba(100, 100, 100, 0.8);
 }

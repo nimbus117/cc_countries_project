@@ -12,7 +12,7 @@ const MapSelectView = function(element) {
 
 MapSelectView.prototype.bindEvents = function () {
   PubSub.subscribe('Countries:country-names', (event) => {
-    this.renderSelectView(event.detail.map(c => c.name));
+    // this.renderSelectView(event.detail.map(c => c.name));
     this.renderMap(event.detail);
   });
 };
@@ -30,9 +30,9 @@ MapSelectView.prototype.renderMap = function (data) {
   Highcharts.mapChart(element, {
     chart: {
       map: 'custom/world-robinson-highres',
-      height: 700,
-      borderWidth: 2,
-      backgroundColor: '#CCEAFF'
+      height: '50%',
+      // borderWidth: 2,
+      backgroundColor: '#7FCAFF'
     },
     title: {
       text: ''
@@ -46,13 +46,14 @@ MapSelectView.prototype.renderMap = function (data) {
     series: [{
       allowPointSelect: true,
       animation: true,
+      borderColor: 'black',
       data: this.excludeCountries(data),
       joinBy: ['iso-a3', 'code'],
       name: 'Index',
       showInLegend: false,
       states: {
         hover: {
-          color: 'black'
+          // color: 'black'
         },
         select: {
           color: '#fff000'
