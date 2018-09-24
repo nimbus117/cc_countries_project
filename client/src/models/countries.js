@@ -11,6 +11,15 @@ Countries.prototype.bindEvents = function () {
   PubSub.subscribe('SelectView:country-index', (event) => {
     this.publishCountry(event.detail);
   });
+  PubSub.subscribe('NavView:button-click', e => {
+    console.log(e.detail)
+    switch (e.detail) {
+      case 'map':
+        this.publishSelectDetails(); break;
+      case 'charts':
+        this.publishAllDetails(); break;
+    }
+  });
 };
 
 Countries.prototype.getData = function () {
@@ -21,13 +30,12 @@ Countries.prototype.getData = function () {
       this.totalPopulation = data.reduce((total, c) => total + c.population, 0);
       this.totalArea = data.reduce((total, c) => total + c.area, 0);
       this.publishSelectDetails(data);
-      this.publishAllDetails();
     })
     .catch(console.error)
 }
 
-Countries.prototype.publishSelectDetails = function (data) {
-  const countryDetails = data.map((country, index) => {
+Countries.prototype.publishSelectDetails = function () {
+  const countryDetails = this.data.map((country, index) => {
     return {
       name: country.name,
       value: index,
