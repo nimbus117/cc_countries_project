@@ -19,7 +19,17 @@ GiniChartView.prototype.renderGini = function (info) {
 
   const preparedInfo = info.map(x => {
     return {name: x.name, y: x.gini}
-  });
+  })
+
+  const bottom_five = preparedInfo.sort((a, b) => (b.y - a.y)).splice(0, 5);
+
+  const top_five = preparedInfo.sort((a, b) => (a.y - b.y))
+  .filter((x) => {
+    return x.y
+  }).splice(0, 5).reverse();
+
+  const top_and_bottom_five = bottom_five.concat(top_five);
+
   const element = createAppend('div', '', this.element);
   element.id = ('gini-pyramid');
   Highcharts.chart(element, {
@@ -47,19 +57,7 @@ GiniChartView.prototype.renderGini = function (info) {
     },
     series: [{
       name: 'GINI',
-      data: preparedInfo
-      // [
-      //   ['Seychelles',	65.8],
-      //   ['Comoros',	64.3],
-      //   ['Namibia',	63.9],
-      //   ['South Africa',	63.1],
-      //   ['Botswana',	61],
-      //   ['Czech Republic',	26],
-      //   ['Austria',	26],
-      //   ['Norway',	25.8],
-      //   ['Sweden',	25],
-      //   ['Denmark',	24]
-      // ]
+      data: top_and_bottom_five
     }]
   });
 };
