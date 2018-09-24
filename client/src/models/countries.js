@@ -14,7 +14,10 @@ Countries.prototype.bindEvents = function () {
 Countries.prototype.getData = function () {
   new Request('https://restcountries.eu/rest/v2/all')
     .get()
-    .then(data => this.publishSelectDetails(data))
+    .then(data => {
+      this.publishSelectDetails(data);
+      this.publishAllDetails();
+    })
     .catch(console.error)
 }
 
@@ -28,6 +31,11 @@ Countries.prototype.publishSelectDetails = function (data) {
     }
   });
   PubSub.publish('Countries:country-names', countryDetails);
+}
+
+Countries.prototype.publishAllDetails = function () {
+  PubSub.publish('Countries:all-data', this.data);
+  console.log("yolo2")
 }
 
 Countries.prototype.publishCountry = function (index) {
