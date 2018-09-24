@@ -3,6 +3,8 @@ const Request = require('../helpers/request.js');
 
 const Countries = function () {
   this.data = [];
+  this.totalPopulation = null;
+  this.totalArea = null;
 }
 
 Countries.prototype.bindEvents = function () {
@@ -15,6 +17,9 @@ Countries.prototype.getData = function () {
   new Request('https://restcountries.eu/rest/v2/all')
     .get()
     .then(data => {
+      this.data = data;
+      this.totalPopulation = data.reduce((total, c) => total + c.population, 0);
+      this.totalArea = data.reduce((total, c) => total + c.area, 0);
       this.publishSelectDetails(data);
       this.publishAllDetails();
     })
@@ -22,7 +27,6 @@ Countries.prototype.getData = function () {
 }
 
 Countries.prototype.publishSelectDetails = function (data) {
-  this.data = data;
   const countryDetails = data.map((country, index) => {
     return {
       name: country.name,
@@ -39,8 +43,10 @@ Countries.prototype.publishAllDetails = function () {
 }
 
 Countries.prototype.publishCountry = function (index) {
-  PubSub.publish('Countries:country-data', this.data[index]);
+  const details = this.data[index];
+  details['totalPopulation'] = this.totalPopulation;
+  details['totalArea'] = this.totalArea;
+  PubSub.publish('Countries:country-data', details);
 };
-
 
 module.exports = Countries;

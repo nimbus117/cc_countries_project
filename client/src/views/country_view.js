@@ -1,5 +1,7 @@
 const PubSub = require('../helpers/pub_sub.js');
 const createAppend = require('../helpers/create_append.js');
+const MapView = require('./map_view.js');
+const CountryChartView = require('./country_chart_view.js');
 
 const CountryView = function(element) {
   this.element = element;
@@ -37,6 +39,23 @@ CountryView.prototype.render = function (c) {
   const flag = createAppend("img", '', this.element);
   flag.src = c.flag;
   flag.alt = `The ${c.demonym} flag`;
+
+  const mapDiv = createAppend("div", '', this.element)
+  mapDiv.id = "mapid";
+  const mapView = new MapView(mapDiv, c);
+
+  const population = [
+    {name: c.name, y: c.population},
+    {name: 'World', y: c.totalPopulation}
+  ]
+  new CountryChartView(this.element)
+    .render(population, 'World Population', 'Population')
+  const area = [
+    {name: c.name, y: c.area},
+    {name: 'World', y: c.totalArea}
+  ]
+  new CountryChartView(this.element)
+    .render(area, 'World Area', 'Area')
 };
 
 module.exports = CountryView;
