@@ -1,7 +1,7 @@
 const Countries = require('./models/countries.js');
 const MapSelectView = require('./views/map_select_view.js');
 const CountryView = require('./views/country_view.js')
-const navView = require('./views/nav_view.js');
+const NavView = require('./views/nav_view.js');
 
 document.addEventListener('DOMContentLoaded', () => {
   const selectElement = document.querySelector('#select');

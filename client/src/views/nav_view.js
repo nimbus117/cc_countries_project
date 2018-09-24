@@ -1,17 +1,26 @@
 const PubSub = require('../helpers/pub_sub.js');
 const createAppend = require('../helpers/create_append.js');
+const SelectView = require('./map_select_view.js');
 
-const SelectView = function(element) {
+const NavView = function(element) {
   this.element = element;
-  this.select = null;
 };
 
+NavView.prototype.bindEvents = function () {
+  const navdiv = createAppend('div', '', this.element);
+  navdiv.className = "topnav";
+  navdiv.id = "navbar";
 
-//
-// <div class="topnav" id="navbar">
-//   <a href="#map" class="active">Map Select</a>
-//   <a href="#graphs">Global Graphs</a>
-//   <a href="#about" style="float:right;">About</a>
-//   <!-- SELECT DROP DOWN -->
-//   <div id="dropdown" style="float:right;"></div>
-// </div>
+  const map = createAppend('a', 'Map Select', navdiv);
+  map.href = "#map";
+
+  const graph = createAppend('a', 'Global Graphs', navdiv);
+  graph.href = "#graphs";
+
+  const about = createAppend('a', 'About', navdiv);
+  about.style = "float:right;";
+  about.href = "#about";
+
+};
+
+module.exports = NavView;
