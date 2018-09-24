@@ -1,4 +1,5 @@
 const PubSub = require('../helpers/pub_sub.js');
+const leaflet = require('leaflet');
 
 const MapView = function(element, data) {
   this.element = element;
