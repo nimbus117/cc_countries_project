@@ -37,12 +37,12 @@ CountryView.prototype.render = function (c) {
   handleSublist('regionalBlocs', x => `${x.name} (${x.acronym})`);
 
   const flag = createAppend("img", '', this.element);
-  flag.src = data.flag;
-  flag.alt = `The ${data.demonym} flag`;
+  flag.src = c.flag;
+  flag.alt = `The ${c.demonym} flag`;
 
   const mapDiv = createAppend("div", '', this.element)
   mapDiv.id = "mapid";
-  const mapView = new MapView(mapDiv, data);
+  const mapView = new MapView(mapDiv, c);
 };
 
 module.exports = CountryView;
