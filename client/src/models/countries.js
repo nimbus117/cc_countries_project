@@ -39,7 +39,6 @@ Countries.prototype.publishSelectDetails = function (data) {
 
 Countries.prototype.publishAllDetails = function () {
   PubSub.publish('Countries:all-data', this.data);
-  console.log("yolo2")
 }
 
 Countries.prototype.publishCountry = function (index) {

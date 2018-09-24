@@ -10,14 +10,16 @@ const GiniChartView = function(element) {
 };
 
 GiniChartView.prototype.bindEvents = function () {
-  console.log("yolo1")
   PubSub.subscribe('Countries:all-data', (event) => {
     this.renderGini(event.detail);
-    console.log("yolo3");
   });
 }
 
-GiniChartView.prototype.renderGini = function (data) {
+GiniChartView.prototype.renderGini = function (info) {
+
+  const preparedInfo = info.map(x => {
+    return {name: x.name, y: x.gini}
+  });
   const element = createAppend('div', '', this.element);
   element.id = ('gini-pyramid');
   Highcharts.chart(element, {
@@ -45,18 +47,19 @@ GiniChartView.prototype.renderGini = function (data) {
     },
     series: [{
       name: 'GINI',
-      data: [
-        ['Seychelles',	65.8],
-        ['Comoros',	64.3],
-        ['Namibia',	63.9],
-        ['South Africa',	63.1],
-        ['Botswana',	61],
-        ['Czech Republic',	26],
-        ['Austria',	26],
-        ['Norway',	25.8],
-        ['Sweden',	25],
-        ['Denmark',	24]
-      ]
+      data: preparedInfo
+      // [
+      //   ['Seychelles',	65.8],
+      //   ['Comoros',	64.3],
+      //   ['Namibia',	63.9],
+      //   ['South Africa',	63.1],
+      //   ['Botswana',	61],
+      //   ['Czech Republic',	26],
+      //   ['Austria',	26],
+      //   ['Norway',	25.8],
+      //   ['Sweden',	25],
+      //   ['Denmark',	24]
+      // ]
     }]
   });
 };
