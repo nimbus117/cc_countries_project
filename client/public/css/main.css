@@ -1,4 +1,13 @@
+body {
+  background-color: #FFDCBF;
+  padding: 15px;
+}
+
 #mapid {
   height: 300px;
   width: 300px;
+}
+
+#map-select {
+  box-shadow: 0 5px 8px rgba(100, 100, 100, 0.8);
 }

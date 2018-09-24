@@ -1,21 +1,16 @@
 const Countries = require('./models/countries.js');
-const SelectView = require('./views/select_view.js');
-const CountryView = require('./views/country_view.js');
+const MapSelectView = require('./views/map_select_view.js');
+const CountryView = require('./views/country_view.js')
+
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('JavaScript Loaded');
-
-  const selectElement = document.querySelector('#countries');
-  const selectView = new SelectView(selectElement);
-  selectView.bindEvents();
+  const selectElement = document.querySelector('#select');
+  const mapSelectView = new MapSelectView(selectElement);
+  mapSelectView.bindEvents();
 
   const displayElement = document.querySelector('#display');
   const countryView = new CountryView(displayElement);
   countryView.bindEvents();
-
-  // const mapElement = document.querySelector('#mapid');
-  // const mapView = new MapView(mapElement);
-  // mapView.bindEvents();
 
   const countries = new Countries;
   countries.getData();
