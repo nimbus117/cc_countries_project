@@ -3,6 +3,7 @@ const MapSelectView = require('./views/map_select_view.js');
 const CountryView = require('./views/country_view.js')
 const NavView = require('./views/nav_view.js');
 const GiniChartView = require('./views/gini_chart_view.js');
+const Wikipedia = require('./models/wikipedia.js');
 
 document.addEventListener('DOMContentLoaded', () => {
   const selectElement = document.querySelector('#select');
@@ -19,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const navElement = document.querySelector('#nav');
   const navView = new NavView(navElement);
   navView.bindEvents();
+
+  const wiki = new Wikipedia;
+  wiki.bindEvents();
 
   const countries = new Countries;
   countries.getData();
