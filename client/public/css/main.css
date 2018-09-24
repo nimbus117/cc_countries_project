@@ -26,6 +26,8 @@
 body {
   background-color: #FFDCBF;
   padding: 15px;
+  margin: 0;
+  padding: 0;
 }
 
 #mapid {
