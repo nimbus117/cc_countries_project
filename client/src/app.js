@@ -2,6 +2,7 @@ const Countries = require('./models/countries.js');
 const MapSelectView = require('./views/map_select_view.js');
 const CountryView = require('./views/country_view.js')
 const NavView = require('./views/nav_view.js');
+const GiniChartView = require('./views/gini_chart_view.js');
 
 document.addEventListener('DOMContentLoaded', () => {
   const selectElement = document.querySelector('#select');
@@ -11,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const displayElement = document.querySelector('#display');
   const countryView = new CountryView(displayElement);
   countryView.bindEvents();
+
+  const giniChartView = new GiniChartView(displayElement);
+  giniChartView.bindEvents();
 
   const navElement = document.querySelector('#nav');
   const navView = new NavView(navElement);

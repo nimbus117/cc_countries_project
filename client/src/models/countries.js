@@ -21,6 +21,7 @@ Countries.prototype.getData = function () {
       this.totalPopulation = data.reduce((total, c) => total + c.population, 0);
       this.totalArea = data.reduce((total, c) => total + c.area, 0);
       this.publishSelectDetails(data);
+      this.publishAllDetails();
     })
     .catch(console.error)
 }
@@ -34,6 +35,11 @@ Countries.prototype.publishSelectDetails = function (data) {
     }
   });
   PubSub.publish('Countries:country-names', countryDetails);
+}
+
+Countries.prototype.publishAllDetails = function () {
+  PubSub.publish('Countries:all-data', this.data);
+  console.log("yolo2")
 }
 
 Countries.prototype.publishCountry = function (index) {
