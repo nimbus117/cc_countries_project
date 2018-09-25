@@ -31,7 +31,13 @@ FlagQuiz.prototype.start = function () {
 };
 
 FlagQuiz.prototype.randomAnswer = function () {
-  this.answer = Math.floor(Math.random()*this.data.length);
+  let newAnswer = Math.floor(Math.random()*this.data.length);
+  this.answerlist.forEach(function(e) {
+    if (e === newAnswer) {
+      newAnswernewAnswer = Math.floor(Math.random()*250);
+    }
+  });
+  this.answer = newAnswer;
   this.answerlist.push(this.answer);
   this.currentflags.push(this.answer);
   // console.log(this.answer);
@@ -46,6 +52,7 @@ FlagQuiz.prototype.getFlags = function () {
 };
 
 FlagQuiz.prototype.arrange = function () {
+  // console.log(this.answerlist);
   const random1 = this.randomFlag();
   const random2 = this.randomFlag();
   const random3 = this.randomFlag();
