@@ -7,7 +7,7 @@ require('highcharts/modules/funnel')(Highcharts);
 
 const GiniChartView = function(element) {
   this.element = element;
-  this.allCountries = null;
+  // this.allCountries = null;
 };
 
 GiniChartView.prototype.bindEvents = function () {
@@ -57,9 +57,7 @@ GiniChartView.prototype.renderGini = function (info) {
           events:{
             click: event => {
               const selectedCountry = info.findIndex((item) => {
-                if (item.name === event.point.name) {
-                  return true
-                }
+                return item.name === event.point.name
               })
               PubSub.publish('SelectView:country-index', selectedCountry);
             }
