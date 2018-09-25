@@ -57,14 +57,17 @@ FlagQuiz.prototype.arrange = function () {
 
   const namediv = createAppend('div','',this.element);
   const scorediv = createAppend('div','',this.element);
+  const turndiv = createAppend('div','',this.element);
   const flagdiv = createAppend('div','',this.element);
 
   namediv.id = 'fqname';
   scorediv.id = 'fqscore';
+  turndiv.id = 'fqturn';
   flagdiv.id = 'fqflags';
 
   const answername = createAppend('h1', `Find the Flag for ${this.data[this.answer].name}!`, namediv);
   const scoredisplay = createAppend('h2', `Score: ${this.score}/20`, scorediv);
+  const turndisplay = createAppend('h2', `Round: ${this.turn}/20`, turndiv);
   const flag1 = createAppend('img', '', flagdiv);
   const flag2 = createAppend('img', '' , flagdiv);
   const flag3 = createAppend('img', '', flagdiv);
