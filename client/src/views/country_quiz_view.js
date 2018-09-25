@@ -47,7 +47,7 @@ CountryQuizView.prototype.render = function (quizData) {
       input.value = a.true;
       input.type = 'radio';
       input.name = name;
-      const answer = numberWithCommas(a.answer);
+      const answer = numberWithCommas(a.answer) || ':-(';
       const label = createAppend('label', ` ${answer}`, container)
     })
   }
