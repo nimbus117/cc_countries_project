@@ -8,7 +8,7 @@ const FlagQuiz = function (element) {
   this.answerlist = [];
   this.currentflags = [];
   this.score = 0;
-  this.turn = 1;
+  this.turn = 0;
 }
 
 FlagQuiz.prototype.bindEvents = function () {
@@ -52,29 +52,34 @@ FlagQuiz.prototype.arrange = function () {
 
   const namediv = createAppend('div','',this.element);
   const scorediv = createAppend('div','',this.element);
-  const flagdiv1 = createAppend('div','',this.element);
-  const flagdiv2 = createAppend('div','',this.element);
-  const flagdiv3 = createAppend('div','',this.element);
-  const flagdiv4 = createAppend('div','',this.element);
+  const flagdiv = createAppend('div','',this.element);
+  // const flagdiv2 = createAppend('div','',this.element);
+  // const flagdiv3 = createAppend('div','',this.element);
+  // const flagdiv4 = createAppend('div','',this.element);
 
   namediv.id = 'fqname';
   scorediv.id = 'fqscore';
-  flagdiv1.id = 'fqflag1';
-  flagdiv2.id = 'fqflag2';
-  flagdiv3.id = 'fqflag3';
-  flagdiv4.id = 'fqflag4';
+  flagdiv.id = 'fqflags';
+  // flagdiv2.id = 'fqflag2';
+  // flagdiv3.id = 'fqflag3';
+  // flagdiv4.id = 'fqflag4';
 
   const answername = createAppend('h1', `Find the Flag for ${this.data[this.answer].name}!`, namediv);
   const scoredisplay = createAppend('h2', `Score: ${this.score}/20`, scorediv);
-  const flag1 = createAppend('img', '', flagdiv1);
-  const flag2 = createAppend('img', '' , flagdiv2);
-  const flag3 = createAppend('img', '', flagdiv3);
-  const flag4 = createAppend('img', '', flagdiv4);
+  const flag1 = createAppend('img', '', flagdiv);
+  const flag2 = createAppend('img', '' , flagdiv);
+  const flag3 = createAppend('img', '', flagdiv);
+  const flag4 = createAppend('img', '', flagdiv);
 
   flag1.src = this.data[random1].flag;
   flag2.src = this.data[random2].flag;
   flag3.src = this.data[random3].flag;
   flag4.src = this.data[random4].flag;
+
+  flag1.height = '300';
+  flag2.height = '300';
+  flag3.height = '300';
+  flag4.height = '300';
 
   flag1.addEventListener('click', e => {
     if (flag1.src === this.data[this.answer].flag) {
@@ -129,7 +134,7 @@ FlagQuiz.prototype.next = function () {
 };
 
 FlagQuiz.prototype.endgame = function () {
-
+  
 };
 
 // Sub all country data *
