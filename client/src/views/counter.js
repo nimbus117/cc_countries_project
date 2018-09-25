@@ -10,7 +10,6 @@ const Counter = function (element) {
 Counter.prototype.bindEvents = function () {
   PubSub.subscribe('Countries:counter-data', (event) => {
     this.addData(event.detail);
-    this.percentUpdate();
     this.update();
   });
 };
@@ -21,10 +20,7 @@ Counter.prototype.addData = function (index) {
   }
   this.cArray.push(parseInt(index));
   console.log(this.cArray);
-};
-
-Counter.prototype.percentUpdate = function () {
-  
+  this.percentage = (this.cArray.length / 250) * 100;
 };
 
 Counter.prototype.update = function () {
