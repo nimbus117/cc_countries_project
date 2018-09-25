@@ -70,12 +70,12 @@ Countries.prototype.publishCountry = function (index) {
 
 Countries.prototype.publishCountryQuiz = function (countryIndex) {
   const country = this.data[countryIndex];
-  let otherCountries = this.data .filter(c => c !== country);
+  let otherCountries = this.data .filter(c => c.region !== country.region);
   const testCountries = [];
   for (let x = 3; x > 0; x--) {
     const testCountry = otherCountries[Math.floor(Math.random() * otherCountries.length)];
     testCountries.push(testCountry);
-    otherCountries = otherCountries.filter(c => c !== testCountry);
+    otherCountries = otherCountries.filter(c => c.region !== testCountry.region);
   }
   PubSub.publish('Countries:country-quiz', {true: country, false: testCountries})
 }

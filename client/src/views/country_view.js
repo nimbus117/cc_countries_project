@@ -65,7 +65,7 @@ CountryView.prototype.render = function (c) {
     PubSub.publish('CountryView:quiz-button', c.index)
   })
 };
-
+// https://en.wikipedia.org/?curid=
 CountryView.prototype.renderWiki = function (countryText) {
   const wiki = createAppend('div', countryText, this.element)
   wiki.id = "wiki-text";

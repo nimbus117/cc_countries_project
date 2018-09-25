@@ -15,7 +15,6 @@ Wikipedia.prototype.bindEvents = function () {
 
 Wikipedia.prototype.getData = function (countryName) {
   this.fixName(countryName);
-  // console.log(countryName);
   new Request(`http://localhost:3000/wikipedia/${this.name}`)
   .get()
   .then(data => {
