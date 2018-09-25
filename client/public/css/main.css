@@ -65,10 +65,12 @@ body {
   margin-bottom: 1em;
 }
 
-.quiz-correct + label {
+.quiz-true + label {
   color: green;
+  font-weight: bold;
 }
 
-.quiz-incorrect + label {
+.quiz-false + label {
   color: red;
+  font-weight: bold;
 }

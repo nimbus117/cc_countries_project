@@ -26,22 +26,21 @@ CountryQuizView.prototype.render = function (quizData) {
   const form = createAppend('form', '', this.element);
 
   const createQuestion = (property, question, name) => {
-    let answers = [];
-    answers.push({answer: quizData['true'][property], correct: 1});
-    quizData['false'].forEach(e => answers.push({answer: e[property], correct: 0}));
+    let answers = [{answer: quizData['true'][property], true: 1}];
+    quizData['false'].forEach(c => answers.push({answer: c[property], true: 0}));
     answers = this.shuffleArray(answers);
+
     const container = createAppend('div', '', form)
     container.classList.add('question-container')
     const label = createAppend('label', `${question}?`, container);
-    label.classList.add('quiz-question');
     label.setAttribute("for", name)
     createAppend('br', '', container)
+
     answers.forEach(a => {
       createAppend('br', '', container)
       const input = createAppend('input', '', container);
-      input.classList.add('quiz-answer');
       input.setAttribute('required', true)
-      input.value = a.correct;
+      input.value = a.true;
       input.type = 'radio';
       input.name = name;
       const label = createAppend('label', ` ${a.answer}`, container)
@@ -60,18 +59,19 @@ CountryQuizView.prototype.render = function (quizData) {
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    submitInput.setAttribute('disabled', true);
     let result = 5;
     for (let i = 0; i < 20; i++) {
       const input = e.target[i]
       if (input.value === '1') {
-        input.classList.add('quiz-correct');
+        input.classList.add('quiz-true');
       }
       if (input.value === '0' && input.checked === true) {
-        input.classList.add('quiz-incorrect');
+        input.classList.add('quiz-false');
         result--
       }
     }
-    createAppend('h3', `${result}/5 correctly answered`, form);
+    createAppend('span', ` ${result}/5 correctly answered`, form);
   })
 };
 
