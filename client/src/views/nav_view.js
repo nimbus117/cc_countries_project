@@ -11,13 +11,19 @@ NavView.prototype.bindEvents = function () {
   map.classList.add('nav-button');
   map.addEventListener('click', e => {
     PubSub.publish('NavView:button-click', 'map')
-  }) 
+  })
 
   const charts = createAppend('span', 'Charts', this.element);
   charts.classList.add('nav-button');
   charts.addEventListener('click', e => {
     PubSub.publish('NavView:button-click', 'charts')
-  }) 
+  })
+
+  const flag = createAppend('span', 'Flag Quiz', this.element);
+  flag.classList.add('nav-button');
+  flag.addEventListener('click', e => {
+    PubSub.publish('NavView:button-click', 'flag')
+  })
 
   const dropdown = createAppend('span', '', this.element);
   dropdown.id = "nav-select";
