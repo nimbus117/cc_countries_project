@@ -4,18 +4,31 @@ const createAppend = require('../helpers/create_append.js');
 const Counter = function (element) {
   this.element = element;
   this.cArray = [];
-  this.percentage = 0;
+  this.percentage = 0.0;
 }
 
 Counter.prototype.bindEvents = function () {
-  const display = createAppend('h3', `You have viewed ${this.cArray.length} countries so far, ${this.percentage}% of the total!`, this.element);
   PubSub.subscribe('Countries:counter-data', (event) => {
     this.addData(event.detail);
+    this.percentUpdate();
+    this.update();
   });
 };
 
 Counter.prototype.addData = function (index) {
-  this.cArray.push(index);
+  if (this.cArray.find(e => e===index)) {
+    return;
+  }
+  this.cArray.push(parseInt(index));
   console.log(this.cArray);
+};
+
+Counter.prototype.percentUpdate = function () {
+  
+};
+
+Counter.prototype.update = function () {
+  this.element.innerHTML = '';
+  const display = createAppend('h3', `You have viewed ${this.cArray.length} countries so far, ${this.percentage}% of the total!`, this.element);
 };
 module.exports = Counter;

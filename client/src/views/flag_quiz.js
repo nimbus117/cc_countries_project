@@ -34,7 +34,7 @@ FlagQuiz.prototype.randomAnswer = function () {
   let newAnswer = Math.floor(Math.random()*this.data.length);
   this.answerlist.forEach(function(e) {
     if (e === newAnswer) {
-      newAnswernewAnswer = Math.floor(Math.random()*250);
+      newAnswer = Math.floor(Math.random()*250);
     }
   });
   this.answer = newAnswer;
