@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   giniChartView.bindEvents();
 
   const flagQuiz = new FlagQuiz(displayElement);
-  flagQuiz.start();
+  flagQuiz.bindEvents();
 
   const navView = new NavView(navElement);
   navView.bindEvents();
