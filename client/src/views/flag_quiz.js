@@ -3,13 +3,17 @@ const createAppend = require('../helpers/create_append.js');
 
 const FlagQuiz = function (element) {
   this.element = element;
+  this.data = [];
   this.answerlist = [];
   this.score = 0;
   this.turn = 1;
 }
 
 FlagQuiz.prototype.start = function () {
-  
+  PubSub.subscribe('Countries:flag-game-data', (event) => {
+    this.data = event.detail;
+    // console.log(this.data);
+  });
 };
 
 // Sub all country data

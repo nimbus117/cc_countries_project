@@ -12,12 +12,14 @@ Countries.prototype.bindEvents = function () {
     this.publishCountry(event.detail);
   });
   PubSub.subscribe('NavView:button-click', e => {
-    console.log(e.detail)
+    // console.log(e.detail)
     switch (e.detail) {
       case 'map':
         this.publishSelectDetails(); break;
       case 'charts':
         this.publishAllDetails(); break;
+      case 'flag':
+        this.startFlagGame(); break;
     }
   });
 };
@@ -48,6 +50,10 @@ Countries.prototype.publishSelectDetails = function () {
 Countries.prototype.publishAllDetails = function () {
   PubSub.publish('Countries:all-data', this.data);
 }
+
+Countries.prototype.startFlagGame = function () {
+  PubSub.publish('Countries:flag-game-data', this.data);
+};
 
 Countries.prototype.publishCountry = function (index) {
   const details = this.data[index];
