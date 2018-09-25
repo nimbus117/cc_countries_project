@@ -3,6 +3,7 @@ const Request = require('../helpers/request.js');
 
 const Wikipedia = function() {
   this.data = null;
+  this.name = null;
 };
 
 Wikipedia.prototype.bindEvents = function () {
@@ -13,7 +14,9 @@ Wikipedia.prototype.bindEvents = function () {
 };
 
 Wikipedia.prototype.getData = function (countryName) {
-  new Request(`http://localhost:3000/wikipedia/${countryName}`)
+  this.fixName(countryName);
+  // console.log(countryName);
+  new Request(`http://localhost:3000/wikipedia/${this.name}`)
   .get()
   .then(data => {
     this.data = data;
@@ -22,6 +25,26 @@ Wikipedia.prototype.getData = function (countryName) {
     PubSub.publish('Wikipedia:country-text', countryDataText);
   })
   .catch(console.error)
+};
+
+Wikipedia.prototype.fixName = function (countryName) {
+  switch (countryName) {
+    case 'Virgin Islands (British)':
+      this.name = 'British Virgin Islands'
+      break;
+    case 'Georgia':
+      this.name = 'Georgia (Country)'
+      break;
+    case 'Macedonia (the former Yugoslav Republic of)':
+      this.name = 'Republic of Macedonia'
+      break;
+    case "Korea (Democratic People's Republic of)":
+      this.name = 'North Korea'
+      break;
+    default:
+        this.name = countryName;
+  }
+  console.log(this.name);
 };
 
 
