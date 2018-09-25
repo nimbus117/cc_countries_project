@@ -41,18 +41,18 @@ CountryView.prototype.render = function (c) {
   flag.alt = `The ${c.demonym} flag`;
 
   const mapDiv = createAppend("div", '', this.element)
-  mapDiv.id = "mapid";
+  mapDiv.id = "country-map";
   const mapView = new MapView(mapDiv, c);
 
   const population = [
     {name: c.name, y: c.population},
-    {name: 'World', y: c.totalPopulation}
+    {name: 'World', y: c.totalPopulation - c.population}
   ]
   new CountryChartView(this.element)
     .render(population, 'World Population', 'Population')
   const area = [
     {name: c.name, y: c.area},
-    {name: 'World', y: c.totalArea}
+    {name: 'World', y: c.totalArea - c.area}
   ]
   new CountryChartView(this.element)
     .render(area, 'World Area', 'Area')

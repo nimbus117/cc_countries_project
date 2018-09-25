@@ -12,9 +12,6 @@ SelectView.prototype.create = function (selectId, selectText) {
   const select = createAppend('select', '', this.element)
   select.id = selectId;
   this.select = select;
-  const option = createAppend('option', '', select);
-  option.setAttribute('disabled', true);
-  option.setAttribute('selected', true);
 };
 
 SelectView.prototype.bindEvents = function (pubChannel) {
@@ -24,6 +21,10 @@ SelectView.prototype.bindEvents = function (pubChannel) {
 };
 
 SelectView.prototype.populate = function (names) {
+  this.select.innerHTML = '';
+  const option = createAppend('option', '', this.select);
+  option.setAttribute('disabled', true);
+  option.setAttribute('selected', true);
   names.forEach((name, index) => {
     const option = createAppend('option', name, this.select);
     option.value = index;
