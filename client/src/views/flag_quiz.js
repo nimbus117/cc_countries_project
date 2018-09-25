@@ -51,18 +51,21 @@ FlagQuiz.prototype.arrange = function () {
   const random4 = this.randomFlag();
 
   const namediv = createAppend('div','',this.element);
+  const scorediv = createAppend('div','',this.element);
   const flagdiv1 = createAppend('div','',this.element);
   const flagdiv2 = createAppend('div','',this.element);
   const flagdiv3 = createAppend('div','',this.element);
   const flagdiv4 = createAppend('div','',this.element);
 
   namediv.id = 'fqname';
+  scorediv.id = 'fqscore';
   flagdiv1.id = 'fqflag1';
   flagdiv2.id = 'fqflag2';
   flagdiv3.id = 'fqflag3';
   flagdiv4.id = 'fqflag4';
 
   const answername = createAppend('h1', `Find the Flag for ${this.data[this.answer].name}!`, namediv);
+  const scoredisplay = createAppend('h2', `Score: ${this.score}/20`, scorediv);
   const flag1 = createAppend('img', '', flagdiv1);
   const flag2 = createAppend('img', '' , flagdiv2);
   const flag3 = createAppend('img', '', flagdiv3);
@@ -114,8 +117,19 @@ FlagQuiz.prototype.randomFlag = function () {
 };
 
 FlagQuiz.prototype.next = function () {
-  this.turn++;
-console.log(this.turn);
+  if (this.turn < 20) {
+    this.turn++;
+    this.element.innerHTML = '';
+    this.randomAnswer();
+    this.getFlags();
+    this.arrange();
+  } else {
+    this.endgame();
+  }
+};
+
+FlagQuiz.prototype.endgame = function () {
+
 };
 
 // Sub all country data *
