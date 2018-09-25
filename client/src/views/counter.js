@@ -14,12 +14,12 @@ Counter.prototype.bindEvents = function () {
   });
 };
 
-Counter.prototype.addData = function (index) {
-  if (this.cArray.find(e => e===index)) {
+Counter.prototype.addData = function (data) {
+  const index = parseInt(data);
+  if (this.cArray.includes(index)) {
     return;
   }
-  this.cArray.push(parseInt(index));
-  console.log(this.cArray);
+  this.cArray.push(index);
   this.percentage = (this.cArray.length / 250) * 100;
 };
 
