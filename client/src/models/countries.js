@@ -60,6 +60,7 @@ Countries.prototype.publishCountry = function (index) {
   details['totalPopulation'] = this.totalPopulation;
   details['totalArea'] = this.totalArea;
   PubSub.publish('Countries:country-data', details);
+  PubSub.publish('Countries:counter-data', index);
 };
 
 module.exports = Countries;

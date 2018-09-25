@@ -6,11 +6,13 @@ const GiniChartView = require('./views/gini_chart_view.js');
 const FlagQuiz = require('./views/flag_quiz.js');
 const Wikipedia = require('./models/wikipedia.js');
 const LangChartView = require('./views/language_chart_view.js');
+const Counter = require('./views/counter.js');
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const displayElement = document.querySelector('#display');
   const navElement = document.querySelector('#nav');
+  const counterElement = document.querySelector('#counter');
 
   const mapSelectView = new MapSelectView(displayElement);
   mapSelectView.bindEvents();
@@ -32,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const wiki = new Wikipedia;
   wiki.bindEvents();
+
+  const counter = new Counter(counterElement);
+  counter.bindEvents();
 
   const countries = new Countries;
   countries.getData();
