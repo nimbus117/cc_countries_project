@@ -47,3 +47,16 @@ body {
   height: 300px;
   width: 300px;
 }
+
+#gini-pyramid {
+  min-width: 410px;
+  max-width: 600px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+#lang-chart {
+  max-width: 800px;
+  min-width: 380px;
+  margin: 0 auto;
+}
