@@ -7,6 +7,7 @@ require('highcharts/modules/funnel')(Highcharts);
 
 const GiniChartView = function(element) {
   this.element = element;
+  this.allCountries = null;
 };
 
 GiniChartView.prototype.bindEvents = function () {
@@ -15,8 +16,8 @@ GiniChartView.prototype.bindEvents = function () {
   });
 }
 
-GiniChartView.prototype.renderGini = function (info) {
 
+GiniChartView.prototype.renderGini = function (info) {
   this.element.innerHTML = '';
   const preparedInfo = info.map(x => {
     return {name: x.name, y: x.gini}
@@ -50,7 +51,20 @@ GiniChartView.prototype.renderGini = function (info) {
           softConnector: true
         },
         center: ['40%', '50%'],
-        width: '80%'
+        width: '80%',
+        cursor: 'pointer',
+        point:{
+          events:{
+            click: event => {
+              const selectedCountry = info.findIndex((item) => {
+                if (item.name === event.point.name) {
+                  return true
+                }
+              })
+              PubSub.publish('SelectView:country-index', selectedCountry);
+            }
+          }
+        }
       }
     },
     legend: {

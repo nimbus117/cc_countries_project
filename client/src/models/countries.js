@@ -12,7 +12,6 @@ Countries.prototype.bindEvents = function () {
     this.publishCountry(event.detail);
   });
   PubSub.subscribe('NavView:button-click', e => {
-    console.log(e.detail)
     switch (e.detail) {
       case 'map':
         this.publishSelectDetails(); break;
