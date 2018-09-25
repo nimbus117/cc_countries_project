@@ -56,6 +56,11 @@ CountryView.prototype.render = function (c) {
   ]
   new CountryChartView(this.element)
     .render(area, 'World Area', 'Area')
+
+  const quizButton = createAppend('button', 'Take Quiz', this.element)
+  quizButton.addEventListener('click', e => {
+    PubSub.publish('CountryView:quiz-button', c.index)
+  })
 };
 
 module.exports = CountryView;

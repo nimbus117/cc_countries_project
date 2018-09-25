@@ -60,3 +60,8 @@ body {
   min-width: 380px;
   margin: 0 auto;
 }
+
+.quiz-question {
+  display:block;
+  padding-top: 1em;
+}

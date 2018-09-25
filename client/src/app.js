@@ -4,6 +4,7 @@ const CountryView = require('./views/country_view.js')
 const NavView = require('./views/nav_view.js');
 const GiniChartView = require('./views/gini_chart_view.js');
 const LangChartView = require('./views/language_chart_view.js');
+const CountryQuizView = require('./views/country_quiz_view.js');
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -28,4 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const countries = new Countries;
   countries.getData();
   countries.bindEvents();
+
+  const countryQuizView = new CountryQuizView(displayElement);
+  countryQuizView.bindEvents();
 })

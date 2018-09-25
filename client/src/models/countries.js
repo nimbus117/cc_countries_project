@@ -8,11 +8,16 @@ const Countries = function () {
 }
 
 Countries.prototype.bindEvents = function () {
+
   PubSub.subscribe('SelectView:country-index', (event) => {
     this.publishCountry(event.detail);
   });
+
+  PubSub.subscribe('CountryView:quiz-button', e => {
+    this.publishCountryQuiz(e.detail)
+  })
+
   PubSub.subscribe('NavView:button-click', e => {
-    console.log(e.detail)
     switch (e.detail) {
       case 'map':
         this.publishSelectDetails(); break;
@@ -53,7 +58,20 @@ Countries.prototype.publishCountry = function (index) {
   const details = this.data[index];
   details['totalPopulation'] = this.totalPopulation;
   details['totalArea'] = this.totalArea;
+  details['index'] = index;
   PubSub.publish('Countries:country-data', details);
 };
+
+Countries.prototype.publishCountryQuiz = function (countryIndex) {
+  const country = this.data[countryIndex];
+  let otherCountries = this.data .filter(c => c !== country);
+  const testCountries = [];
+  for (let x = 3; x > 0; x--) {
+    const testCountry = otherCountries[Math.floor(Math.random() * otherCountries.length)];
+    testCountries.push(testCountry);
+    otherCountries = otherCountries.filter(c => c !== testCountry);
+  }
+  PubSub.publish('Countries:country-quiz', {true: country, false: testCountries})
+}
 
 module.exports = Countries;
