@@ -20,7 +20,6 @@ Wikipedia.prototype.getData = function (countryName) {
     const countryData = this.data.query.pages;
     const countryDataText = Object.values(countryData)[0].extract;
     PubSub.publish('Wikipedia:country-text', countryDataText);
-    console.log(countryDataText);
   })
   .catch(console.error)
 };
