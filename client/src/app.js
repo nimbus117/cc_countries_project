@@ -6,18 +6,19 @@ const GiniChartView = require('./views/gini_chart_view.js');
 const Wikipedia = require('./models/wikipedia.js');
 
 document.addEventListener('DOMContentLoaded', () => {
-  const selectElement = document.querySelector('#select');
-  const mapSelectView = new MapSelectView(selectElement);
-  mapSelectView.bindEvents();
 
   const displayElement = document.querySelector('#display');
+  const navElement = document.querySelector('#nav');
+
+  const mapSelectView = new MapSelectView(displayElement);
+  mapSelectView.bindEvents();
+
   const countryView = new CountryView(displayElement);
   countryView.bindEvents();
 
   const giniChartView = new GiniChartView(displayElement);
   giniChartView.bindEvents();
 
-  const navElement = document.querySelector('#nav');
   const navView = new NavView(navElement);
   navView.bindEvents();
 

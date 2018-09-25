@@ -12,7 +12,6 @@ const MapSelectView = function(element) {
 
 MapSelectView.prototype.bindEvents = function () {
   PubSub.subscribe('Countries:country-names', (event) => {
-    // this.renderSelectView(event.detail.map(c => c.name));
     this.renderMap(event.detail);
   });
 };
@@ -25,8 +24,9 @@ MapSelectView.prototype.excludeCountries = function (data) {
 }
 
 MapSelectView.prototype.renderMap = function (data) {
+  this.element.innerHTML = '';
   const element = createAppend('div', '', this.element);
-  element.id = ('map-select');
+  element.id = ('select-map');
   Highcharts.mapChart(element, {
     chart: {
       map: 'custom/world-robinson-highres',
@@ -81,13 +81,6 @@ MapSelectView.prototype.renderMap = function (data) {
       formatter: function () {return this.point.name;}
     }
   });
-}
-
-MapSelectView.prototype.renderSelectView = function (countries) {
-  const selectView = new SelectView(this.element);
-  selectView.create('countries-select', 'Select a country: ');
-  selectView.bindEvents('SelectView:country-index');
-  selectView.populate(countries);
 }
 
 module.exports = MapSelectView;

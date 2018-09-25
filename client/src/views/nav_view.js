@@ -7,35 +7,26 @@ const NavView = function(element) {
 };
 
 NavView.prototype.bindEvents = function () {
-  const navdiv = createAppend('div', '', this.element);
-  navdiv.className = "topnav";
-  navdiv.id = "navbar";
+  const map = createAppend('span', 'Map', this.element);
+  map.classList.add('nav-button');
+  map.addEventListener('click', e => {
+    PubSub.publish('NavView:button-click', 'map')
+  }) 
 
-  const map = createAppend('a', 'Map Select', navdiv);
-  map.href = "#map";
+  const charts = createAppend('span', 'Charts', this.element);
+  charts.classList.add('nav-button');
+  charts.addEventListener('click', e => {
+    PubSub.publish('NavView:button-click', 'charts')
+  }) 
 
-  const graph = createAppend('a', 'Global Graphs', navdiv);
-  graph.href = "#graphs";
-
-  const about = createAppend('a', 'About', navdiv);
-  about.style = "float:right;";
-  about.href = "#about";
-
-  const dropdown = createAppend('a', '', navdiv);
-  dropdown.style = "float:right;";
-  dropdown.id = "drop";
-
+  const dropdown = createAppend('span', '', this.element);
+  dropdown.id = "nav-select";
+  const selectView = new SelectView(dropdown);
+  selectView.create('countries-select', 'Select a country: ');
+  selectView.bindEvents('SelectView:country-index');
   PubSub.subscribe('Countries:country-names', (event) => {
-    this.renderSelectView(event.detail.map(c => c.name), dropdown);
+    selectView.populate(event.detail.map(c => c.name));
   });
 };
-
-  NavView.prototype.renderSelectView = function (countries, navdiv) {
-    const selectView = new SelectView(navdiv);
-    selectView.create('countries-select', 'Select a country: ');
-    selectView.bindEvents('SelectView:country-index');
-    selectView.populate(countries);
-  }
-
 
 module.exports = NavView;

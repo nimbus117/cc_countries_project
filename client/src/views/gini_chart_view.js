@@ -17,6 +17,7 @@ GiniChartView.prototype.bindEvents = function () {
 
 GiniChartView.prototype.renderGini = function (info) {
 
+  this.element.innerHTML = '';
   const preparedInfo = info.map(x => {
     return {name: x.name, y: x.gini}
   });
