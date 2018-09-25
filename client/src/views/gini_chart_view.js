@@ -7,30 +7,31 @@ require('highcharts/modules/funnel')(Highcharts);
 
 const GiniChartView = function(element) {
   this.element = element;
-  // this.allCountries = null;
+  this.allCountries = null;
 };
 
 GiniChartView.prototype.bindEvents = function () {
   PubSub.subscribe('Countries:all-data', (event) => {
+    this.allCountries = event.detail;
     this.renderGini(event.detail);
   });
 }
 
-
-GiniChartView.prototype.renderGini = function (info) {
-  this.element.innerHTML = '';
-  const preparedInfo = info.map(x => {
-    return {name: x.name, y: x.gini}
+GiniChartView.prototype.getGiniInfo = function () {
+  const preparedInfo = this.allCountries.map(country => {
+    return {name: country.name, y: country.gini}
   })
-
   const bottom_five = preparedInfo.sort((a, b) => (b.y - a.y)).splice(0, 5);
-
   const top_five = preparedInfo.sort((a, b) => (a.y - b.y))
-  .filter((x) => {
-    return x.y
+  .filter((country) => {
+    return country.y
   }).splice(0, 5).reverse();
+  return bottom_five.concat(top_five);
+};
 
-  const top_and_bottom_five = bottom_five.concat(top_five);
+GiniChartView.prototype.renderGini = function () {
+  this.element.innerHTML = '';
+  const top_and_bottom_five = this.getGiniInfo();
 
   const element = createAppend('div', '', this.element);
   element.id = ('gini-pyramid');
@@ -41,6 +42,9 @@ GiniChartView.prototype.renderGini = function (info) {
     title: {
       text: 'Equality Pyramid',
       x: -50
+    },
+    subtitle: {
+      text: "A commonly used measurement of inequality is the Gini coefficient, a measure of statistical dispersion intended to represent the income or wealth distribution of a nation's residents. <br> Here are the top and bottom five countries in the world.",
     },
     plotOptions: {
       series: {
@@ -56,7 +60,7 @@ GiniChartView.prototype.renderGini = function (info) {
         point:{
           events:{
             click: event => {
-              const selectedCountry = info.findIndex((item) => {
+              const selectedCountry = this.allCountries.findIndex((item) => {
                 return item.name === event.point.name
               })
               PubSub.publish('SelectView:country-index', selectedCountry);
