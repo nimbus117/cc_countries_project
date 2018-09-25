@@ -16,13 +16,13 @@ Wikipedia.prototype.bindEvents = function () {
 Wikipedia.prototype.getData = function (countryName) {
   this.fixName(countryName);
   new Request(`http://localhost:3000/wikipedia/${this.name}`)
-  .get()
-  .then(data => {
-    this.data = data;
-    const countryData = Object.values(data.query.pages)[0];
-    PubSub.publish('Wikipedia:country-data', countryData);
-  })
-  .catch(console.error)
+    .get()
+    .then(data => {
+      this.data = data;
+      const countryData = Object.values(data.query.pages)[0];
+      PubSub.publish('Wikipedia:country-data', countryData);
+    })
+    .catch(console.error)
 };
 
 Wikipedia.prototype.fixName = function (countryName) {

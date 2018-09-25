@@ -39,11 +39,6 @@ CountryView.prototype.render = function (c) {
   handleSublist('languages', x => `${x.name} (${x.nativeName})`);
   handleSublist('regionalBlocs', x => `${x.name} (${x.acronym})`);
 
-  const quizButton = createAppend('button', 'Take Quiz', this.element)
-  quizButton.addEventListener('click', e => {
-    PubSub.publish('CountryView:quiz-button', c.index)
-  })
-
   const flag = createAppend("img", '', this.element);
   flag.src = c.flag;
   flag.alt = `The ${c.demonym} flag`;
@@ -52,23 +47,33 @@ CountryView.prototype.render = function (c) {
   mapDiv.id = "country-map";
   const mapView = new MapView(mapDiv, c);
 
-  const population = [
+  const populationChart = [
     {name: c.name, y: c.population},
     {name: 'World', y: c.totalPopulation - c.population}
   ]
   new CountryChartView(this.element)
-    .render(population, 'World Population', 'Population')
-  const area = [
+    .render(populationChart, 'World Population', 'Population')
+
+  const areaChart = [
     {name: c.name, y: c.area},
     {name: 'World', y: c.totalArea - c.area}
   ]
   new CountryChartView(this.element)
-    .render(area, 'World Area', 'Area')
+    .render(areaChart, 'World Area', 'Area')
+
+  const quizButton = createAppend('button', 'Take Quiz', this.element)
+  quizButton.addEventListener('click', e => {
+    PubSub.publish('CountryView:quiz-button', c.index)
+  })
 };
 
 CountryView.prototype.renderWiki = function (countryData) {
-  const wiki = createAppend('p', countryData.extract, this.element)
-  wiki.id = "wiki-text";
+  const wikiDiv = createAppend('div', '', this.element);
+  wikiDiv.id = 'wiki-div';
+  createAppend('p', countryData.extract, wikiDiv);
+  const link = createAppend('a', 'Read full article', wikiDiv);
+  link.href = `https://en.wikipedia.org/?curid=${countryData.pageid}`;
+  link.target = '_blank';
 };
 
 module.exports = CountryView;
