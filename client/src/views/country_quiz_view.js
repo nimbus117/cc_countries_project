@@ -26,7 +26,8 @@ CountryQuizView.prototype.render = function (quizData) {
   const form = createAppend('form', '', this.element);
 
   const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (x != null) 
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   const createQuestion = (property, question, name) => {
@@ -47,7 +48,7 @@ CountryQuizView.prototype.render = function (quizData) {
       input.value = a.true;
       input.type = 'radio';
       input.name = name;
-      const answer = numberWithCommas(a.answer) || ':-(';
+      const answer = numberWithCommas(a.answer) || 'N/A';
       const label = createAppend('label', ` ${answer}`, container)
     })
   }
