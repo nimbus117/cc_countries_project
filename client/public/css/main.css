@@ -60,3 +60,15 @@ body {
   min-width: 380px;
   margin: 0 auto;
 }
+
+.question-container {
+  margin-bottom: 1em;
+}
+
+.quiz-correct + label {
+  color: green;
+}
+
+.quiz-incorrect + label {
+  color: red;
+}
