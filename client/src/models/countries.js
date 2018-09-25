@@ -66,6 +66,7 @@ Countries.prototype.publishCountry = function (index) {
   details['totalArea'] = this.totalArea;
   details['index'] = index;
   PubSub.publish('Countries:country-data', details);
+  PubSub.publish('Countries:counter-data', index);
 };
 
 Countries.prototype.publishCountryQuiz = function (countryIndex) {
