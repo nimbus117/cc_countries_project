@@ -22,7 +22,7 @@ LangChartView.prototype.renderLangChart = function () {
       type: 'variwide'
     },
     title: {
-      text: 'Most spoken languages in the World'
+      text: "Worlds's most spoken languages"
     },
     subtitle: {
       text: 'Source: RESTCountries'
@@ -30,7 +30,7 @@ LangChartView.prototype.renderLangChart = function () {
     xAxis: {
       type: 'category',
       title: {
-        text: 'Column widths are proportional to population totals'
+        text: 'Column widths are proportional to the number of countries'
       }
     },
     legend: {
@@ -39,26 +39,26 @@ LangChartView.prototype.renderLangChart = function () {
     series: [{
       name: 'Languages',
       data: [
-        ['Amharic', 1, 92206005],
-        ['Arabic', 20, 385518637],
-        ['Bengali', 1, 161006790],
-        ['Chinese', 3, 1401574615],
-        ['English', 77, 1181667020],
-        ['French', 32, 351775168],
-        ['Hindi', 1, 1295210000],
-        ['Indonesian', 1, 258705000],
-        ['Japanese', 1, 126960000],
-        ['Portuguese', 8, 272236029],
-        ['Russian', 1, 146599183],
-        ['Spanish', 22, 452399649],
-        ['Vietnamese', 1, 92700000]
+        ['Amharic', 92206005, 1],
+        ['Arabic', 385518637, 20],
+        ['Bengali', 161006790, 1],
+        ['Chinese', 1401574615, 3],
+        ['English', 1181667020, 77],
+        ['French', 351775168, 32],
+        ['Hindi', 1295210000, 1],
+        ['Indonesian', 258705000, 1],
+        ['Japanese', 126960000, 1],
+        ['Portuguese', 272236029, 8],
+        ['Russian', 146599183, 1],
+        ['Spanish', 452399649, 22],
+        ['Vietnamese', 92700000, 1]
       ],
       dataLabels: {
         enabled: true,
-        format: '{point.y:.0f} countries'
+        format: '{point.y:.0f} people'
       },
       tooltip: {
-        pointFormat: 'is spoken by {point.z} people <br>across {point.y} countries'
+        pointFormat: 'spoken by {point.y} people <br>across {point.z} countries'
       },
       colorByPoint: true
     }]
