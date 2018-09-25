@@ -6,11 +6,13 @@ const GiniChartView = require('./views/gini_chart_view.js');
 const LangChartView = require('./views/language_chart_view.js');
 
 document.addEventListener('DOMContentLoaded', () => {
-  const selectElement = document.querySelector('#select');
-  const mapSelectView = new MapSelectView(selectElement);
-  mapSelectView.bindEvents();
 
   const displayElement = document.querySelector('#display');
+  const navElement = document.querySelector('#nav');
+
+  const mapSelectView = new MapSelectView(displayElement);
+  mapSelectView.bindEvents();
+
   const countryView = new CountryView(displayElement);
   countryView.bindEvents();
 
@@ -20,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const langChartView = new LangChartView(displayElement);
   langChartView.bindEvents();
 
-  const navElement = document.querySelector('#nav');
   const navView = new NavView(navElement);
   navView.bindEvents();
 
