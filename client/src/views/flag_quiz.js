@@ -9,6 +9,7 @@ const FlagQuiz = function (element) {
   this.currentflags = [];
   this.score = 0;
   this.turn = 0;
+  this.congrats = '';
 }
 
 FlagQuiz.prototype.bindEvents = function () {
@@ -125,6 +126,7 @@ FlagQuiz.prototype.next = function () {
   if (this.turn < 20) {
     this.turn++;
     this.element.innerHTML = '';
+    this.checkscore();
     this.randomAnswer();
     this.getFlags();
     this.arrange();
@@ -133,8 +135,37 @@ FlagQuiz.prototype.next = function () {
   }
 };
 
+FlagQuiz.prototype.checkscore = function () {
+  let x = this.score;
+  switch (true) {
+    case (x===0):
+      this.congrats = 'Either you are incredibly unlucky or you are trying to get the lowest score possible. If the former: Bad luck! If the latter: Well Done!';
+      break;
+    case (x<6):
+      this.congrats = 'Better luck next time! Why not go back to the Map and do some cribbing?';
+      break;
+    case (x<11):
+    this.congrats = 'Getting there! Why not go back to the Map and do some cribbing?';
+      break;
+    case (x<16):
+      this.congrats = 'Well done! You are well on your way to being a Flag Master!';
+      break;
+    case (x<20):
+      this.congrats = 'Excellent work! You should be programming this, not me!';
+      break;
+    case (x===20):
+      this.congrats = 'WE ARE NOT WORTHY! WE ARE NOT WORTHY!';
+      break;
+    default:
+      console.log('ERROR');
+  }
+};
+
 FlagQuiz.prototype.endgame = function () {
-  
+  this.element.innerHTML = '';
+  const end = createAppend('h1', 'Thanks for playing!', this.element);
+  const score = createAppend('h2', `You scored ${this.score}/20!`, this.element);
+  const congrats = createAppend('h2', this.congrats, this.element);
 };
 
 // Sub all country data *
