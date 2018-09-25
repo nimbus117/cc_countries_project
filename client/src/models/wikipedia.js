@@ -15,14 +15,12 @@ Wikipedia.prototype.bindEvents = function () {
 
 Wikipedia.prototype.getData = function (countryName) {
   this.fixName(countryName);
-  // console.log(countryName);
   new Request(`http://localhost:3000/wikipedia/${this.name}`)
   .get()
   .then(data => {
     this.data = data;
-    const countryData = this.data.query.pages;
-    const countryDataText = Object.values(countryData)[0].extract;
-    PubSub.publish('Wikipedia:country-text', countryDataText);
+    const countryData = Object.values(data.query.pages)[0];
+    PubSub.publish('Wikipedia:country-data', countryData);
   })
   .catch(console.error)
 };
@@ -44,13 +42,6 @@ Wikipedia.prototype.fixName = function (countryName) {
     default:
         this.name = countryName;
   }
-  console.log(this.name);
 };
-
-
-
-
-
-
 
 module.exports = Wikipedia;
