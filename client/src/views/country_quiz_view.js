@@ -25,6 +25,10 @@ CountryQuizView.prototype.render = function (quizData) {
   this.element.innerHTML = '';
   const form = createAppend('form', '', this.element);
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   const createQuestion = (property, question, name) => {
     let answers = [{answer: quizData['true'][property], true: 1}];
     quizData['false'].forEach(c => answers.push({answer: c[property], true: 0}));
@@ -43,7 +47,8 @@ CountryQuizView.prototype.render = function (quizData) {
       input.value = a.true;
       input.type = 'radio';
       input.name = name;
-      const label = createAppend('label', ` ${a.answer}`, container)
+      const answer = numberWithCommas(a.answer);
+      const label = createAppend('label', ` ${answer}`, container)
     })
   }
 
