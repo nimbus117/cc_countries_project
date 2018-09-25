@@ -9,6 +9,9 @@ const CountryView = function(element) {
 
 CountryView.prototype.bindEvents = function () {
   PubSub.subscribe('Countries:country-data', e => this.render(e.detail))
+  PubSub.subscribe('Wikipedia:country-text', (event) => {
+    this.renderWiki(event.detail);
+  })
 };
 
 CountryView.prototype.render = function (c) {
@@ -56,6 +59,11 @@ CountryView.prototype.render = function (c) {
   ]
   new CountryChartView(this.element)
     .render(area, 'World Area', 'Area')
+};
+
+CountryView.prototype.renderWiki = function (countryText) {
+  const wiki = createAppend('div', countryText, this.element)
+  wiki.id = "wiki-text";
 };
 
 module.exports = CountryView;
