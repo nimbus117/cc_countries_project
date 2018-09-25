@@ -4,6 +4,7 @@ const createAppend = require('../helpers/create_append.js');
 const FlagQuiz = function (element) {
   this.element = element;
   this.data = [];
+  this.answer = 0;
   this.answerlist = [];
   this.score = 0;
   this.turn = 1;
@@ -12,11 +13,21 @@ const FlagQuiz = function (element) {
 FlagQuiz.prototype.start = function () {
   PubSub.subscribe('Countries:flag-game-data', (event) => {
     this.data = event.detail;
+    this.randomAnswer();
     // console.log(this.data);
+    // console.log(this.answer);
+    console.log(this.answerlist);
   });
 };
 
-// Sub all country data
+FlagQuiz.prototype.randomAnswer = function () {
+  this.answer = Math.floor(Math.random()*this.data.length);
+  this.answerlist.push(this.answer);
+
+  // console.log(this.answer);
+};
+
+// Sub all country data *
 // Function RandomAnswer (selects a random country but not one that is in answerlist. Then adds index to answerlist)
 // Function RandomFlag (all flags except answer, on click go to next turn)
 // Function AnswerFlag (matches answer, on click score++ and go to next turn)
