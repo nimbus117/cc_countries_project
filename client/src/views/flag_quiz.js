@@ -22,6 +22,8 @@ FlagQuiz.prototype.bindEvents = function () {
 
 FlagQuiz.prototype.start = function () {
   this.element.innerHTML = '';
+  this.quizdiv = createAppend('div', '', this.element)
+  this.quizdiv.id = 'quiz-box';
   this.answerlist = [];
   this.score = 0;
   this.turn = 1;
@@ -51,8 +53,6 @@ FlagQuiz.prototype.getFlags = function () {
 };
 
 FlagQuiz.prototype.arrange = function () {
-  this.quizdiv = createAppend('div', '', this.element)
-  this.quizdiv.id = 'quiz-box';
 
   const random1 = this.randomFlag();
   const random2 = this.randomFlag();
