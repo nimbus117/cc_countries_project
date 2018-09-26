@@ -43,7 +43,9 @@ CountryView.prototype.render = function (c) {
   handleSublist('timezones', x => x);
   handleSublist('currencies', x => `${x.name} (${x.symbol})`);
   handleSublist('languages', x => `${x.name} (${x.nativeName})`);
+  if (c.regionalBlocs.length > 0) {
   handleSublist('regionalBlocs', x => `${x.name} (${x.acronym})`);
+  };
 
   this.wikiDiv = createAppend('div', '', this.countryViewBox);
 

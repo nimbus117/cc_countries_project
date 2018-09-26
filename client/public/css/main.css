@@ -1,24 +1,20 @@
-/* :root {
-  --box-shadow: 0 5px 8px rgba(100, 100, 100, 0.8);
-} */
-
 body {
   background-color: #7FCAFF;
   margin: 0px;
   padding: 0px;
   font-family: Arial;
+  font-size: 16pt;
   overflow-y: scroll;
   overflow-x: hidden;
-  /* width: 100%; */
+}
+
+#counter{
+    text-align: center;
 }
 
 #nav {
   background-color: #4786B2;
-  /* border-bottom: white 3px solid; */
   overflow: hidden;
-  /* position: fixed; */
-  /* width: 100%; */
-  /* box-shadow: var(--box-shadow); */
 }
 
 #nav > span {
@@ -46,10 +42,6 @@ body {
 #counter{
   padding: 0px 20px 0px 20px;
 }
-
-/* #select-map {
-  box-shadow: var(--box-shadow);
-} */
 
 #country-map {
   height: 300px;
@@ -96,7 +88,6 @@ img {
   margin: 10px;
 }
 
-
 #country-view-box {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -130,6 +121,38 @@ img {
 
 #area-chart {
   grid-area: areaChart;
+}
+
+#quiz-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "fqname fqname"
+  "fqturn fqscore"
+  "fqflags fqflags";
+  grid-gap: 10px;
+}
+
+#fqname{
+  grid-area: fqname;
+  text-align: center;
+}
+
+#fqscore{
+  grid-area: fqscore;
+  text-align: right;
+}
+
+#fqturn{
+  grid-area: fqturn;
+}
+
+#fqflags{
+  grid-area: fqflags;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  grid-gap: 10px;
 }
 
 form {
