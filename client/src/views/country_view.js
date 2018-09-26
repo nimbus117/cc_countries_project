@@ -16,9 +16,11 @@ CountryView.prototype.bindEvents = function () {
 
 CountryView.prototype.render = function (c) {
   this.element.innerHTML = '';
+  const statBox = createAppend('div', '', this.element);
+  statBox.id = 'statBox';
   const name = c.name === c.nativeName ? c.name : `${c.name} (${c.nativeName})`;
-  createAppend("h2", name, this.element);
-  const list = createAppend('ul', '', this.element);
+  createAppend("h2", name, statBox);
+  const list = createAppend('ul', '', statBox);
 
   [ `Region: ${c.region}`,
     `Capital City: ${c.capital}`,
@@ -42,6 +44,7 @@ CountryView.prototype.render = function (c) {
   const flag = createAppend("img", '', this.element);
   flag.src = c.flag;
   flag.alt = `The ${c.demonym} flag`;
+  flag.id = 'flagBox';
 
   const mapDiv = createAppend("div", '', this.element)
   mapDiv.id = "country-map";
@@ -65,6 +68,7 @@ CountryView.prototype.render = function (c) {
   quizButton.addEventListener('click', e => {
     PubSub.publish('CountryView:quiz-button', c.index)
   })
+  quizButton.id = 'quizButton';
 };
 
 CountryView.prototype.renderWiki = function (countryData) {
