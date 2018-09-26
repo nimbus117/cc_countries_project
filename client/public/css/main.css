@@ -1,12 +1,15 @@
-
-
 body {
   background-color: #7FCAFF;
   margin: 0px;
   padding: 0px;
   font-family: Arial;
+  font-size: 16pt;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+#counter{
+    text-align: center;
 }
 
 #nav {

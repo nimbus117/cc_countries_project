@@ -20,7 +20,7 @@ Counter.prototype.addData = function (data) {
     return;
   }
   this.cArray.push(index);
-  this.percentage = (this.cArray.length / 250) * 100;
+  this.percentage = ((this.cArray.length / 250) * 100).toFixed(1);
 };
 
 Counter.prototype.update = function () {
