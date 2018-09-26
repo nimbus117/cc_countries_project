@@ -53,7 +53,7 @@ body {
 
 #country-map {
   height: 300px;
-  width: 300px;
+  width: auto;
 }
 
 #gini-pyramid {
@@ -90,13 +90,20 @@ body {
   font-weight: bold;
 }
 
+img {
+  height: 300px;
+  width: auto;
+  margin: 10px;
+}
+
+
 #country-view-box {
   display: grid;
-  grid-template-columns: auto auto;
-  grid-template-areas: "statBox flagBox"
-  "wikiDiv countryMap"
-  "wikiDiv popChart"
-  "wikiDiv areaChart"
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "statBox statBox flagBox"
+  "wikiDiv wikiDiv wikiDiv"
+  "countryMap popChart areaChart";
+  grid-gap: 10px;
 }
 
 #stat-box {
@@ -109,6 +116,8 @@ body {
 
 #flag-box {
   grid-area: flagBox;
+  align-self: center;
+  justify-content: center;
 }
 
 #country-map {
