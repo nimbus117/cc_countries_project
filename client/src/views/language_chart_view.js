@@ -1,7 +1,9 @@
 const PubSub = require('../helpers/pub_sub.js');
 const createAppend = require('../helpers/create_append.js');
 const Highcharts = require('highcharts')
-require('highcharts/modules/variwide')(Highcharts);
+require('highcharts/modules/exporting')(Highcharts);
+require('highcharts/modules/export-data')(Highcharts);
+require('highcharts/modules/funnel')(Highcharts);
 
 const LangChartView = function(element) {
   this.element = element;
@@ -19,18 +21,23 @@ LangChartView.prototype.renderLangChart = function () {
 
   Highcharts.chart(element, {
     chart: {
-      type: 'variwide'
+      type: 'funnel'
     },
     title: {
-      text: "Worlds's most spoken languages"
+      text: 'Most spoken languages funnel'
     },
-    subtitle: {
-      text: 'Source: RESTCountries'
-    },
-    xAxis: {
-      type: 'category',
-      title: {
-        text: 'Column widths are proportional to the number of countries'
+    plotOptions: {
+      series: {
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b> ({point.y:,.0f})',
+          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+          softConnector: true
+        },
+        center: ['40%', '50%'],
+        neckWidth: '30%',
+        neckHeight: '25%',
+        width: '80%'
       }
     },
     legend: {
@@ -53,20 +60,9 @@ LangChartView.prototype.renderLangChart = function () {
         ['Spanish', 452399649, 22],
         ['Vietnamese', 92700000, 1]
       ],
-      dataLabels: {
-        enabled: true,
-        format: '{point.y:.0f} people'
-      },
-      tooltip: {
-        pointFormat: 'spoken by {point.y} people <br>across {point.z} countries'
-      },
-      colorByPoint: true
     }]
   });
 };
-
-
-
 
 
 module.exports = LangChartView;
