@@ -3,6 +3,7 @@ const createAppend = require('../helpers/create_append.js');
 
 const FlagQuiz = function (element) {
   this.element = element;
+  this.quizdiv = null;
   this.data = [];
   this.answer = 0;
   this.answerlist = [];
@@ -50,15 +51,18 @@ FlagQuiz.prototype.getFlags = function () {
 };
 
 FlagQuiz.prototype.arrange = function () {
+  this.quizdiv = createAppend('div', '', this.element)
+  this.quizdiv.id = 'quiz-box';
+
   const random1 = this.randomFlag();
   const random2 = this.randomFlag();
   const random3 = this.randomFlag();
   const random4 = this.randomFlag();
 
-  const namediv = createAppend('div','',this.element);
-  const scorediv = createAppend('div','',this.element);
-  const turndiv = createAppend('div','',this.element);
-  const flagdiv = createAppend('div','',this.element);
+  const namediv = createAppend('div','',this.quizdiv);
+  const scorediv = createAppend('div','',this.quizdiv);
+  const turndiv = createAppend('div','',this.quizdiv);
+  const flagdiv = createAppend('div','',this.quizdiv);
 
   namediv.id = 'fqname';
   scorediv.id = 'fqscore';
@@ -119,7 +123,7 @@ FlagQuiz.prototype.randomFlag = function () {
 FlagQuiz.prototype.next = function () {
   if (this.turn < 20) {
     this.turn++;
-    this.element.innerHTML = '';
+    this.quizdiv.innerHTML = '';
     this.checkscore();
     this.randomAnswer();
     this.getFlags();
@@ -156,10 +160,10 @@ FlagQuiz.prototype.checkscore = function () {
 };
 
 FlagQuiz.prototype.endgame = function () {
-  this.element.innerHTML = '';
-  const end = createAppend('h1', 'Thanks for playing!', this.element);
-  const score = createAppend('h2', `You scored ${this.score}/20!`, this.element);
-  const congrats = createAppend('h2', this.congrats, this.element);
+  this.quizdiv.innerHTML = '';
+  const end = createAppend('h1', 'Thanks for playing!', this.quizdiv);
+  const score = createAppend('h2', `You scored ${this.score}/20!`, this.quizdiv);
+  const congrats = createAppend('h2', this.congrats, this.quizdiv);
 };
 
 module.exports = FlagQuiz;
