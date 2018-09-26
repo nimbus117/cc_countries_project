@@ -7,13 +7,20 @@ require('highcharts/modules/funnel')(Highcharts);
 
 const LangChartView = function(element) {
   this.element = element;
+  this.allCountries = null;
 };
 
 LangChartView.prototype.bindEvents = function () {
   PubSub.subscribe('Countries:all-data', (event) => {
+    this.allCountries = event.detail;
     this.renderLangChart(event.detail);
   });
 };
+//
+// LangChartView.prototype.getAllLangs = function () {
+//
+// };
+
 
 LangChartView.prototype.renderLangChart = function () {
   const element = createAppend('div', '', this.element);
@@ -24,7 +31,7 @@ LangChartView.prototype.renderLangChart = function () {
       type: 'funnel'
     },
     title: {
-      text: 'Most spoken languages funnel'
+      text: 'Languages Funnel'
     },
     plotOptions: {
       series: {
@@ -44,21 +51,19 @@ LangChartView.prototype.renderLangChart = function () {
       enabled: false
     },
     series: [{
-      name: 'Languages',
+      name: 'People',
+      // data: [],
       data: [
-        ['Amharic', 92206005, 1],
-        ['Arabic', 385518637, 20],
-        ['Bengali', 161006790, 1],
-        ['Chinese', 1401574615, 3],
-        ['English', 1181667020, 77],
-        ['French', 351775168, 32],
-        ['Hindi', 1295210000, 1],
-        ['Indonesian', 258705000, 1],
-        ['Japanese', 126960000, 1],
-        ['Portuguese', 272236029, 8],
-        ['Russian', 146599183, 1],
-        ['Spanish', 452399649, 22],
-        ['Vietnamese', 92700000, 1]
+        ['Chinese', 1,401,574,615],
+        ['Hindi', 1,295,210,000],
+        ['English', 1,181,667,020],
+        ['Spanish', 452,399,649],
+        ['Arabic', 385,518,637],
+        ['French', 351,775,168],
+        ['Portuguese', 272,236,029],
+        ['Indonesian', 258,705,000],
+        ['Bengali', 161,006,790],
+        ['Russian', 146,599,183]
       ],
     }]
   });
