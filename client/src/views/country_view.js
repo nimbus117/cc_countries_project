@@ -5,6 +5,8 @@ const CountryChartView = require('./country_chart_view.js');
 
 const CountryView = function(element) {
   this.element = element;
+  this.countryViewBox = null;
+  this.wikiDiv = null;
 }
 
 CountryView.prototype.bindEvents = function () {
@@ -16,9 +18,13 @@ CountryView.prototype.bindEvents = function () {
 
 CountryView.prototype.render = function (c) {
   this.element.innerHTML = '';
+  this.countryViewBox = createAppend('div', '', this.element);
+  this.countryViewBox.id = 'country-view-box';
+  const statBox = createAppend('div', '', this.countryViewBox);
+  statBox.id = 'stat-box';
   const name = c.name === c.nativeName ? c.name : `${c.name} (${c.nativeName})`;
-  createAppend("h2", name, this.element);
-  const list = createAppend('ul', '', this.element);
+  createAppend("h2", name, statBox);
+  const list = createAppend('ul', '', statBox);
 
   [ `Region: ${c.region}`,
     `Capital City: ${c.capital}`,
@@ -39,11 +45,14 @@ CountryView.prototype.render = function (c) {
   handleSublist('languages', x => `${x.name} (${x.nativeName})`);
   handleSublist('regionalBlocs', x => `${x.name} (${x.acronym})`);
 
-  const flag = createAppend("img", '', this.element);
+  this.wikiDiv = createAppend('div', '', this.countryViewBox);
+
+  const flag = createAppend("img", '', this.countryViewBox);
   flag.src = c.flag;
   flag.alt = `The ${c.demonym} flag`;
+  flag.id = 'flag-box';
 
-  const mapDiv = createAppend("div", '', this.element)
+  const mapDiv = createAppend("div", '', this.countryViewBox)
   mapDiv.id = "country-map";
   const mapView = new MapView(mapDiv, c);
 
@@ -51,27 +60,28 @@ CountryView.prototype.render = function (c) {
     {name: c.name, y: c.population},
     {name: 'World', y: c.totalPopulation - c.population}
   ]
-  new CountryChartView(this.element)
-    .render(populationChart, 'World Population', 'Population')
+  new CountryChartView(this.countryViewBox)
+    .render(populationChart, 'World Population', 'Population', 'pop-chart')
+
 
   const areaChart = [
     {name: c.name, y: c.area},
     {name: 'World', y: c.totalArea - c.area}
   ]
-  new CountryChartView(this.element)
-    .render(areaChart, 'World Area', 'Area')
+  new CountryChartView(this.countryViewBox)
+    .render(areaChart, 'World Area', 'Area', 'area-chart')
 
-  const quizButton = createAppend('button', 'Take Quiz', this.element)
+  const quizButton = createAppend('button', 'Take Quiz', statBox)
   quizButton.addEventListener('click', e => {
     PubSub.publish('CountryView:quiz-button', c.index)
   })
+  quizButton.id = 'quiz-button';
 };
 
 CountryView.prototype.renderWiki = function (countryData) {
-  const wikiDiv = createAppend('div', '', this.element);
-  wikiDiv.id = 'wiki-div';
-  createAppend('p', countryData.extract, wikiDiv);
-  const link = createAppend('a', 'Read full article', wikiDiv);
+  this.wikiDiv.id = 'wiki-div';
+  createAppend('p', countryData.extract, this.wikiDiv);
+  const link = createAppend('a', 'Read full article', this.wikiDiv);
   link.href = `https://en.wikipedia.org/?curid=${countryData.pageid}`;
   link.target = '_blank';
 };
