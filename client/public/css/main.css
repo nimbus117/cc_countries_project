@@ -136,7 +136,6 @@ img {
 
 #fqscore{
   grid-area: fqscore;
-  /* justify: right; */
   text-align: right;
 }
 
@@ -146,6 +145,17 @@ img {
 
 #fqflags{
   grid-area: fqflags;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  /* justify-content: center;
+  text-align: center;
+  align-self: center; */
+  /* grid-template-areas: "fqname fqname"
+  "fqturn fqscore"
+  "fqflags fqflags"; */
+  grid-gap: 10px;
 }
 
 form {
