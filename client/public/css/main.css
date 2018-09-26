@@ -120,6 +120,31 @@ img {
   grid-area: areaChart;
 }
 
+#quizdiv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "fqname fqname"
+  "fqturn fqscore"
+  "fqflags fqflags";
+  grid-gap: 10px;
+}
+
+#fqname{
+  grid-area: fqname;
+}
+
+#fqscore{
+  grid-area: fqscore;
+}
+
+#fqturn{
+  grid-area: fqturn;
+}
+
+#fqflags{
+  grid-area: fqflags;
+}
+
 form {
   margin-top: 20px;
   padding: auto;
