@@ -16,63 +16,78 @@ PopulationChartView.prototype.bindEvents = function () {
   });
 };
 
+
+PopulationChartView.prototype.getDensities = function () {
+  const preparedInfo = [];
+  this.allCountries.forEach(country => {
+
+  if (country.area && country.population && (country.population / country.area !== Infinity)) {
+
+    const eachCountry = {
+      name: country.name,
+      y: country.area,
+      z: country.population / country.area
+    }
+
+
+    preparedInfo.push(eachCountry)
+  }
+})
+
+  // const china = preparedInfo.find((country) => {
+  //   return country.name === "China"
+  // })
+  // console.log(china);
+
+  const finalResult = preparedInfo.sort((a, b) => (b.z - a.z))
+  .filter((country) => {
+    return country.z
+  }).splice(0, 10);
+  return finalResult
+};
+
+
+
 PopulationChartView.prototype.renderPopulation = function () {
+  const top_ten = this.getDensities();
   const element = createAppend('div', '', this.element);
   element.id = 'population-donut';
 
   Highcharts.chart(element, {
-  chart: {
-    type: 'variablepie'
-  },
-  title: {
-    text: 'Countries compared by population density and total area.'
-  },
-  tooltip: {
-    headerFormat: '',
-    pointFormat: '<span style="color:{point.color}">●</span> <b> {point.name}</b><br/>' +
+    chart: {
+      type: 'variablepie'
+    },
+    title: {
+      text: 'Population Density Donut'
+    },
+    subtitle: {
+      text: 'Top 10 countries compared by population density and area'
+    },
+    tooltip: {
+      headerFormat: '',
+      pointFormat: '<span style="color:{point.color}">●</span> <b> {point.name}</b><br/>' +
       'Area (square km): <b>{point.y}</b><br/>' +
       'Population density (people per square km): <b>{point.z}</b><br/>'
-  },
-  series: [{
-    minPointSize: 10,
-    innerSize: '20%',
-    zMin: 0,
-    name: 'countries',
-    data: [{
-      name: 'Spain',
-      y: 505370,
-      z: 92.9
-    }, {
-      name: 'France',
-      y: 551500,
-      z: 118.7
-    }, {
-      name: 'Poland',
-      y: 312685,
-      z: 124.6
-    }, {
-      name: 'Czech Republic',
-      y: 78867,
-      z: 137.5
-    }, {
-      name: 'Italy',
-      y: 301340,
-      z: 201.8
-    }, {
-      name: 'Switzerland',
-      y: 41277,
-      z: 214.5
-    }, {
-      name: 'Germany',
-      y: 357022,
-      z: 235.6
+    },
+    series: [{
+      minPointSize: 10,
+      innerSize: '20%',
+      zMin: 0,
+      name: 'countries',
+      data: top_ten,
+      cursor: 'pointer',
+      point:{
+        events:{
+          click: event => {
+            const selectedCountry = this.allCountries.findIndex((item) => {
+              return item.name === event.point.name
+            })
+            PubSub.publish('SelectView:country-index', selectedCountry);
+          }
+        }
+      }
     }]
-  }]
-});
-
-
-
-
+  });
 };
 
 

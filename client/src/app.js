@@ -22,18 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const countryView = new CountryView(displayElement);
   countryView.bindEvents();
 
-  const giniChartView = new GiniChartView(displayElement);
-  giniChartView.bindEvents();
-
   const flagQuiz = new FlagQuiz(displayElement);
   flagQuiz.bindEvents();
 
-  const langChartView = new LangChartView(displayElement);
-  langChartView.bindEvents();
+  const giniChartView = new GiniChartView(displayElement);
+  giniChartView.bindEvents();
 
   const populationChartView = new PopulationChartView(displayElement);
   populationChartView.bindEvents();
 
+  const langChartView = new LangChartView(displayElement);
+  langChartView.bindEvents();
+  
   const navView = new NavView(navElement);
   navView.bindEvents();
 
