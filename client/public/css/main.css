@@ -131,3 +131,12 @@ img {
 #area-chart {
   grid-area: areaChart;
 }
+
+form {
+  margin-top: 20px;
+  padding: auto;
+}
+
+label {
+  font-size: 20px;
+}
