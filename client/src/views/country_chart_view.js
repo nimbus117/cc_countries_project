@@ -6,9 +6,10 @@ const CountryChartView = function (element) {
   this.element = element;
 }
 
-CountryChartView.prototype.render = function (data, title, seriesName) {
+CountryChartView.prototype.render = function (data, title, seriesName, id) {
   const element = createAppend('div', '', this.element);
   element.classList.add('country-chart')
+  element.id = id
   Highcharts.chart(element, {
     chart: {
       borderWidth: 1,

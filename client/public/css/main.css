@@ -89,3 +89,36 @@ body {
   color: red;
   font-weight: bold;
 }
+
+#country-view-box {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas: "statBox flagBox"
+  "wikiDiv countryMap"
+  "wikiDiv popChart"
+  "wikiDiv areaChart"
+}
+
+#stat-box {
+  grid-area: statBox;
+}
+
+#wiki-div {
+  grid-area: wikiDiv;
+}
+
+#flag-box {
+  grid-area: flagBox;
+}
+
+#country-map {
+  grid-area: countryMap;
+}
+
+#pop-chart {
+  grid-area: popChart;
+}
+
+#area-chart {
+  grid-area: areaChart;
+}
