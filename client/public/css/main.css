@@ -120,7 +120,7 @@ img {
   grid-area: areaChart;
 }
 
-#quizdiv {
+#quiz-box {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "fqname fqname"
@@ -131,10 +131,13 @@ img {
 
 #fqname{
   grid-area: fqname;
+  text-align: center;
 }
 
 #fqscore{
   grid-area: fqscore;
+  /* justify: right; */
+  text-align: right;
 }
 
 #fqturn{
