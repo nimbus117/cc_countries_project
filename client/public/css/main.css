@@ -1,9 +1,9 @@
-:root {
+/* :root {
   --box-shadow: 0 5px 8px rgba(100, 100, 100, 0.8);
-}
+} */
 
 body {
-  background-color: #FFDCBF;
+  background-color: #7FCAFF;
   padding: 15px;
   margin: 0;
   padding: 0;
@@ -12,9 +12,9 @@ body {
 
 #nav {
   background-color: #4786B2;
-  border-bottom: white 3px solid;
+  /* border-bottom: white 3px solid; */
   overflow: hidden;
-  box-shadow: var(--box-shadow);
+  /* box-shadow: var(--box-shadow); */
 }
 
 #nav > span {
@@ -36,7 +36,8 @@ body {
 }
 
 #display {
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
+  margin: -1px;
 }
 
 #select-map {
