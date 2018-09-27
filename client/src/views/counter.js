@@ -25,6 +25,6 @@ Counter.prototype.addData = function (data) {
 
 Counter.prototype.update = function () {
   this.element.innerHTML = '';
-  const display = createAppend('h3', `You have viewed ${this.cArray.length} countries so far, ${this.percentage}% of the total!`, this.element);
+  const display = createAppend('p', `You have viewed ${this.cArray.length} countries so far, ${this.percentage}% of the total!`, this.element);
 };
 module.exports = Counter;
