@@ -1,30 +1,26 @@
 const PubSub = require('../helpers/pub_sub.js');
-const createAppend = require('../helpers/create_append.js');
 
 const Counter = function (element) {
   this.element = element;
-  this.cArray = [];
-  this.percentage = 0.0;
+  this.countryIndexes = [];
 }
 
 Counter.prototype.bindEvents = function () {
-  PubSub.subscribe('Countries:counter-data', (event) => {
-    this.addData(event.detail);
-    this.update();
+  PubSub.subscribe('Countries:country-data', e => {
+    this.addData(e.detail.index);
+    this.render();
   });
 };
 
-Counter.prototype.addData = function (data) {
-  const index = parseInt(data);
-  if (this.cArray.includes(index)) {
-    return;
+Counter.prototype.addData = function (countryIndex) {
+  if (!this.countryIndexes.includes(countryIndex)) {
+    this.countryIndexes.push(countryIndex);
   }
-  this.cArray.push(index);
-  this.percentage = ((this.cArray.length / 250) * 100).toFixed(1);
 };
 
-Counter.prototype.update = function () {
-  this.element.innerHTML = '';
-  const display = createAppend('p', `You have viewed ${this.cArray.length} countries so far, ${this.percentage}% of the total!`, this.element);
+Counter.prototype.render = function () {
+  const percentage = ((this.countryIndexes.length / 250) * 100).toFixed(1);
+  const content = `${this.countryIndexes.length} countries viewed (${percentage}%)`;
+  this.element.innerHTML = content;
 };
 module.exports = Counter;

@@ -23,7 +23,7 @@ Countries.prototype.bindEvents = function () {
         this.publishSelectDetails(); break;
       case 'charts':
         this.publishAllDetails(); break;
-      case 'flag':
+      case 'flag quiz':
         this.startFlagGame(); break;
     }
   });
@@ -36,7 +36,7 @@ Countries.prototype.getData = function () {
       this.data = data;
       this.totalPopulation = data.reduce((total, c) => total + c.population, 0);
       this.totalArea = data.reduce((total, c) => total + c.area, 0);
-      this.publishSelectDetails(data);
+      this.publishSelectDetails();
     })
     .catch(console.error)
 }
@@ -66,7 +66,6 @@ Countries.prototype.publishCountry = function (index) {
   details['totalArea'] = this.totalArea;
   details['index'] = index;
   PubSub.publish('Countries:country-data', details);
-  PubSub.publish('Countries:counter-data', index);
 };
 
 Countries.prototype.publishCountryQuiz = function (countryIndex) {

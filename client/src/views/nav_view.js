@@ -6,24 +6,18 @@ const NavView = function(element) {
   this.element = element;
 };
 
+NavView.prototype.navButtons = function (name) {
+  const element = createAppend('span', name, this.element);
+  element.classList.add('nav-button');
+  element.addEventListener('click', e => {
+    PubSub.publish('NavView:button-click', name.toLowerCase())
+  })
+}
+
 NavView.prototype.bindEvents = function () {
-  const map = createAppend('span', 'Map', this.element);
-  map.classList.add('nav-button');
-  map.addEventListener('click', e => {
-    PubSub.publish('NavView:button-click', 'map')
-  })
-
-  const charts = createAppend('span', 'Charts', this.element);
-  charts.classList.add('nav-button');
-  charts.addEventListener('click', e => {
-    PubSub.publish('NavView:button-click', 'charts')
-  })
-
-  const flag = createAppend('span', 'Flag Quiz', this.element);
-  flag.classList.add('nav-button');
-  flag.addEventListener('click', e => {
-    PubSub.publish('NavView:button-click', 'flag')
-  })
+  this.navButtons('Map');
+  this.navButtons('Charts');
+  this.navButtons('Flag Quiz');
 
   const dropdown = createAppend('span', '', this.element);
   dropdown.id = "nav-select";
